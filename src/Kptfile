@@ -1,11 +1,11 @@
 apiVersion: kpt.dev/v1alpha1
 kind: Kptfile
 metadata:
-  name: sources
+  name: src
 upstream:
   type: git
   git:
-    commit: 1bbde3031211ed894ef6a22256ccf4d916753016
+    commit: f49042cb34a18f7cfa086c01ff3bde6d55815668
     repo: https://github.com/kubernetes/community
     directory: /icons/svg
     ref: master

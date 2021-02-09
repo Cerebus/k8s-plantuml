@@ -1,0 +1,17 @@
+@startuml
+!include k8s/common.puml
+!include k8s/infrastructure_components/unlabeled/all.puml
+!include k8s/control_plane_components/labeled/all.puml
+
+K8S(node1, node, Node 1)
+K8S(node2, node, Node 2)
+
+K8S_BOUNDARY(control, control_plane, Control Plane) {
+    K8S(api, api, kube-apiserver)
+    K8S(cm, c_m, kube-controller-manager)
+    K8S(proxy, k_proxy, kube-proxy)
+    K8S(sched, sched, kube-scheduler)
+}
+
+K8S(etcd, etcd, Etcd)    
+@enduml

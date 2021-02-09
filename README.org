@@ -1,0 +1,59 @@
+#+TITLE: Kubernetes Sprites for PlantUML
+#+STARTUP: inlineimages
+A library of PlantUML sprites for Kubernetes, derived from the [[https://github.com/kubernetes/community/tree/master/icons][Kubernetes Community icons set]].
+* Getting Started
+This library provides two usages; as a "normal" spite tile on a =rectangle= object, and as a header on a "container" object (also implemented as a rectangle).
+#+begin_example
+K8S(alias, kind, label, color)
+K8S_BOUNDARY(alias, kind, label, color)
+#+end_example
+In both cases "color" defaults to =#326ce5= (Kubernetes blue) and is optional.
+
+Include the sprite definitions and =common.puml= following the example below.  This library follows the structure of the community icon library.Each directory has one =all.puml= file that includes all that directory's sprites.  =common.puml= defines the macros that use them.
+#+begin_src plantuml :results replace
+@startuml
+!define k8s https://raw.githubusercontent.com/Cerebus/k8s-plantuml/master/k8s
+!include k8s/common.puml
+!include k8s/infrastructure_components/unlabeled/all.puml
+!include k8s/control_plane_components/labeled/all.puml
+
+K8S(node1, node, Node 1)
+K8S(node2, node, Node 2)
+
+K8S_BOUNDARY(control, control_plane, Control Plane) {
+    K8S(api, api, kube-apiserver)
+    K8S(cm, c_m, kube-controller-manager)
+    K8S(proxy, k_proxy, kube-proxy)
+    K8S(sched, sched, kube-scheduler)
+}
+
+K8S(etcd, etcd, Etcd)
+@enduml
+#+end_src
+
+#+RESULTS:
+[[file:/tmp/babel-hjRxUe/plantuml-ohasFN.png]]
+
+* Building the sprite library
+** Prerequisites
+- =rsvg-convert= - Converts SVG to PNG
+- =plantuml.jar= - Obviously
+- GNU =make=
+** Update icons from upstream
+[[https://googlecontainertools.github.io/kpt/][kpt]] embeds the upstream SVG files in this repository, under =src/=.  Update these files with the following command.
+#+begin_src bash :results silent
+kpt pkg update src/@master --strategy force-delete-replace
+#+end_src
+** Build the library
+Set the environment variable =PLANTUML= to your PlantUML installation and run =make=.
+#+begin_src bash
+PLANTUML=/usr/local/etc/plantuml.jar make
+#+end_src
+By default, sprites build in the =k8s/= directory but can be overridden with the =DEST= environment variable.
+* License
+See [[LICENSE][LICENSE]].
+* Authors
+- T. Miller - [[https://github.com/Cerebus][Cerebus]]
+* Acknowledgements
+- The Kubernetes Community - for the icons
+- [[https://plantuml.com/][The PlantUML Guys]]

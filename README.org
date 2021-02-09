@@ -10,6 +10,8 @@ K8S_BOUNDARY(alias, kind, label, color)
 In both cases "color" defaults to =#326ce5= (Kubernetes blue) and is optional.
 
 Include the sprite definitions and =common.puml= following the example below.  This library follows the structure of the community icon library.Each directory has one =all.puml= file that includes all that directory's sprites.  =common.puml= defines the macros that use them.
+
+*Note*: Due to limitations of PlantUML, all sprites use underscores in place of dashes.  For example, the sprite for "k-proxy" is named "k_proxy".
 #+begin_src plantuml :results replace
 @startuml
 !define k8s https://raw.githubusercontent.com/Cerebus/k8s-plantuml/master/k8s

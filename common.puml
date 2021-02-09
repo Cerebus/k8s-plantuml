@@ -1,3 +1,4 @@
+hide <<boundary>> stereotype
 skinparam defaulttextalignment center
 
 !unquoted procedure K8S($alias, $kind, $label, $color="#326ce5")
@@ -5,5 +6,9 @@ skinparam defaulttextalignment center
 !endprocedure
 
 !unquoted procedure K8S_BOUNDARY($alias, $kind, $label, $color="#326ce5")
-    rectangle "=<$$kind*0.25,color=$color> $label" as $alias <<$kind>>
+    rectangle "<$$kind*0.25,color=$color> $label" as $alias <<boundary>>
 !endprocedure
+
+skinparam rectangle<<boundary>> {
+    fontsize 25
+}

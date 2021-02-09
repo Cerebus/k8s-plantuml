@@ -1,10 +1,11 @@
 ##
-# PlantUML k8s library
+# Build the PlantUML k8s library
 #
 # @file
 # @version 0.1
 SDIR = src
-DEST = k8s
+DEST ?= k8s
+PLANTUML ?= plantuml.jar
 
 SVG_SRC = $(call rwildcard, src/, *.svg)
 PNG_SRC = $(SVG_SRC:svg=png)
@@ -27,14 +28,14 @@ $(BUILD_DIRS):
 	cat $< | sed -e "s/326ce5/000000/g" | rsvg-convert -b white -w 128 -f png > $@
 
 %.sprite: %.png
-	java -jar ~/.emacs.d/.local/etc/plantuml.jar -encodesprite 16z $< > $@
+	java -jar $(PLANTUML) -encodesprite 16z $< > $@
 	sed -i -e 's#\$$\w\+\b#\$$$(subst -,_,$(notdir $*))#' $@
 
 %.puml: $(SPRITE_SRC)
 	 cat $(dir $(@:$(DEST)/%=$(SDIR)/%))*.sprite > $@
 
-$(DEST)/common.puml: common.puml
-	cp common.puml $(DEST)/common.puml
+$(DEST)/common.puml: common
+	cp common $(DEST)/common.puml
 
 .PHONY: clean
 clean:

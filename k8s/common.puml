@@ -1,0 +1,9 @@
+skinparam defaulttextalignment center
+
+!unquoted procedure K8S($alias, $kind, $label, $color="#326ce5")
+    rectangle "<$$kind,color=$color>\n$label" as $alias <<$kind>>
+!endprocedure
+
+!unquoted procedure K8S_BOUNDARY($alias, $kind, $label, $color="#326ce5")
+    rectangle "=<$$kind*0.25,color=$color> $label" as $alias <<$kind>>
+!endprocedure

@@ -1,5 +1,6 @@
 ### Locals ###
 *.png
+*.sprite
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,emacs,windows,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,emacs,windows,linux
